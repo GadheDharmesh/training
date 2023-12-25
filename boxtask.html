@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      padding: 0%;
+      margin: 0;
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      margin: 5px;
+      padding: 5px;
+      border: 1px solid #000;
+      cursor: grab;
+      display: inline-block;
+    }
+
+    .close-button {
+      display: block;
+      margin-top: 5px;
+      cursor: pointer;
+      background-color: black;
+      color: white;
+      
+    }
+
+   
+  </style>
+  <title>dharmesh</title>
+</head>
+<body>
+
+  <h1 for="inpval">Apply Color</h1>
+  <input type="text" id="inpval1">
+  <input type="color" id="inpval2">
+  <button onclick="addbox()">Create</button>
+
+  <div id="output"></div>
+
+  <script>
+     
+      var arr1=[]
+      var arr2=[]
+     
+    function addbox() {
+      var inpval1 = document.getElementById('inpval1').value;
+      var inpval2= document.getElementById('inpval2').value;
+      arr2.push(inpval2)
+      arr1.push(inpval1)
+    
+      // console.log(arr1)
+      var inpval = arr1 + "," + arr2
+      var colors = inpval.split(',');
+
+      var output = document.getElementById('output');
+      output.innerHTML = '';
+
+      function applytobody(boxcolor) {
+        document.body.style.background = boxcolor;
+      }
+
+      colors.forEach(function(color) {
+        var box = document.createElement('div');
+        box.className = 'box';
+        box.style.background = color;
+
+        // Add a close button to remove the background color
+        var closeButton = document.createElement('div');
+        closeButton.className = 'close-button';
+        closeButton.innerText = 'Close';
+        closeButton.onclick = function() {
+          removeBox(box);
+        };
+
+      
+        
+        function removeBox(box) {
+        box.remove();
+        document.body.style.background = '';
+      }
+
+        box.appendChild(closeButton);
+
+        box.ondblclick= function() {
+          applytobody(color);
+        };
+        output.appendChild(box);
+      });
+    
+    }
+  </script>
+
+</body>
+</html>
